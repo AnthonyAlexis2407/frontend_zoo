@@ -1,0 +1,46 @@
+<div class="container mt-4">
+  <h2>Detalle del Animal</h2>
+
+  @if (loading()) {
+    <div class="text-center py-5">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
+    </div>
+  } @else if (notFound()) {
+    <div class="alert alert-warning">Animal no encontrado</div>
+    <a routerLink="/animales" class="btn btn-secondary">Volver a la lista</a>
+  } @else if (animal(); as a) {
+    <div class="card mt-3">
+      <div class="card-body">
+        <dl class="row mb-0">
+          <dt class="col-sm-3">Nombre</dt>
+          <dd class="col-sm-9">{{ a.nombre }}</dd>
+
+          <dt class="col-sm-3">Especie</dt>
+          <dd class="col-sm-9">{{ a.especie }}</dd>
+
+          <dt class="col-sm-3">Hábitat</dt>
+          <dd class="col-sm-9">{{ a.habitat }}</dd>
+
+          <dt class="col-sm-3">Edad</dt>
+          <dd class="col-sm-9">{{ a.edad ?? '—' }}</dd>
+
+          <dt class="col-sm-3">Peso</dt>
+          <dd class="col-sm-9">{{ a.peso != null ? a.peso + ' kg' : '—' }}</dd>
+
+          <dt class="col-sm-3">Estado de Salud</dt>
+          <dd class="col-sm-9">{{ a.estadoSalud }}</dd>
+
+          <dt class="col-sm-3">Fecha de Ingreso</dt>
+          <dd class="col-sm-9">{{ a.fechaIngreso ? (a.fechaIngreso | date) : '—' }}</dd>
+        </dl>
+      </div>
+    </div>
+
+    <div class="mt-3">
+      <a [routerLink]="['/animales', a.id, 'editar']" class="btn btn-warning me-2">Editar</a>
+      <a routerLink="/animales" class="btn btn-secondary">Volver</a>
+    </div>
+  }
+</div>

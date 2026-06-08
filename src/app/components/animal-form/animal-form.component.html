@@ -1,0 +1,61 @@
+<div class="container mt-4">
+  <h2>{{ isEdit ? 'Editar' : 'Nuevo' }} Animal</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="row g-3 mt-2" novalidate>
+    <div class="col-md-6">
+      <label for="nombre" class="form-label">Nombre <span class="text-danger">*</span></label>
+      <input id="nombre" formControlName="nombre" class="form-control" [class.is-invalid]="form.get('nombre')?.invalid && form.get('nombre')?.touched">
+      @if (form.get('nombre')?.invalid && form.get('nombre')?.touched) {
+        <div class="invalid-feedback">El nombre es obligatorio</div>
+      }
+    </div>
+
+    <div class="col-md-6">
+      <label for="especie" class="form-label">Especie <span class="text-danger">*</span></label>
+      <input id="especie" formControlName="especie" class="form-control" [class.is-invalid]="form.get('especie')?.invalid && form.get('especie')?.touched">
+      @if (form.get('especie')?.invalid && form.get('especie')?.touched) {
+        <div class="invalid-feedback">La especie es obligatoria</div>
+      }
+    </div>
+
+    <div class="col-md-6">
+      <label for="habitat" class="form-label">Hábitat <span class="text-danger">*</span></label>
+      <input id="habitat" formControlName="habitat" class="form-control" [class.is-invalid]="form.get('habitat')?.invalid && form.get('habitat')?.touched">
+      @if (form.get('habitat')?.invalid && form.get('habitat')?.touched) {
+        <div class="invalid-feedback">El hábitat es obligatorio</div>
+      }
+    </div>
+
+    <div class="col-md-3">
+      <label for="edad" class="form-label">Edad</label>
+      <input id="edad" type="number" formControlName="edad" class="form-control">
+    </div>
+
+    <div class="col-md-3">
+      <label for="peso" class="form-label">Peso (kg)</label>
+      <input id="peso" type="number" step="0.1" formControlName="peso" class="form-control">
+    </div>
+
+    <div class="col-md-6">
+      <label for="estadoSalud" class="form-label">Estado de Salud</label>
+      <select id="estadoSalud" formControlName="estadoSalud" class="form-select">
+        <option value="Sano">Sano</option>
+        <option value="En tratamiento">En tratamiento</option>
+        <option value="En observación">En observación</option>
+        <option value="Crítico">Crítico</option>
+      </select>
+    </div>
+
+    <div class="col-md-6">
+      <label for="fechaIngreso" class="form-label">Fecha de Ingreso</label>
+      <input id="fechaIngreso" type="date" formControlName="fechaIngreso" class="form-control">
+    </div>
+
+    <div class="col-12 mt-4">
+      <button type="submit" class="btn btn-success me-2" [disabled]="form.invalid || submitting">
+        {{ submitting ? 'Guardando...' : 'Guardar' }}
+      </button>
+      <a routerLink="/animales" class="btn btn-secondary">Cancelar</a>
+    </div>
+  </form>
+</div>
